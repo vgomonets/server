@@ -26,7 +26,16 @@ wss.on('connection', function (ws) {
 server.on('request', app);
 
 app.get('/open-tab', function (req, res, next) {
-    res.sendFile(__dirname + '/public/index.html');
+    res.send(`<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>Open Page</title>
+        <script type="text/javascript" src="client.js"></script>
+    </head>
+    <body>
+    </body>
+    </html>`);
 });
 
 server.listen(8080, function () {

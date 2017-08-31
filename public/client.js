@@ -7,7 +7,19 @@ socket.onopen = function (event) {
 };
 
 socket.onmessage = function (event) {
+    console.log("socket, got message", event);
     if(event.data === 'open-tab') {
-        window.postMessage(event.data, '*');
+        window.postMessage({
+          direction: 'dispatcher',
+          command: event.data
+        }, "*");
     }
 }
+
+window.addEventListener("message", function (event) {
+    console.log("client, got message", event);
+    if (event.data.direction === 'page') {
+        document.body.innerHTML = event.data.value;
+      }
+    }
+  );
